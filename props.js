@@ -91,7 +91,7 @@ const possibleProps = {
 	calendar: {
 		values: ["buddhist", "chinese", "coptic", "ethiopia", "ethiopic", "gregory", "hebrew", "indian", "islamic", "iso8601", "japanese", "persian", "roc"],
 		blocked: [],
-		description: "Calandar"
+		description: "Calendar"
 	},
 	dayPeriod: {
 		values: ["narrow", "short", "long"],
