@@ -55,7 +55,7 @@ const setValue = ({ target }: Event) => {
 		} else {
 			formatOptions.set(name, JSON.parse(value));
 		}
-	
+
 		for (const blockedProp of DATE_OPTIONS[name].blocked) {
 			const { select, label } = optionElements.get(blockedProp)!;
 			// When adding an option, disable all properties which it blocks
@@ -68,20 +68,20 @@ const setValue = ({ target }: Event) => {
 	update();
 };
 
-const createOption = (name: string, values: unknown[], displayValues: unknown[], description: string): void => {
+const createOption = (name: string, values: Record<string, unknown>, description: string): void => {
 	const select = create("select", { name }, [
 		create("option"), // Empty <option> indicates unspecified property
-		...values.map((value, i) => // Each possible value for this property
+		...Object.entries(values).map(([textContent, value]) => // Each possible value for this property gets an <option> element
 			create("option", {
-				value: JSON.stringify(value), // Gets an <option> element
-				textContent: displayValues[i] as string // Could be simplified if all DATE_OPTIONS had readableValues (no linked arrays needed)
+				value: JSON.stringify(value),
+				textContent // Key is textContent
 			})
 		),
 	]);
 	select.addEventListener("input", setValue);
 
 	const label = create("label", { textContent: description });
-	
+
 	optionElements.set(name, { select, label });
 
 	optionsContainer.append(create("div", { className: "option" }, [
@@ -90,9 +90,9 @@ const createOption = (name: string, values: unknown[], displayValues: unknown[],
 	]));
 };
 
-createOption("locale", Object.values(locales), Object.keys(locales), "Locale")
-for (const [name, { values, readableValues, description }] of Object.entries(DATE_OPTIONS)) {
-	createOption(name, values, readableValues ?? values, description);
+createOption("locale", locales, "Locale");
+for (const [name, { values, description }] of Object.entries(DATE_OPTIONS)) {
+	createOption(name, values, description);
 }
 
 update();
