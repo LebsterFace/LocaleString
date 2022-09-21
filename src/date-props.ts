@@ -1,3 +1,5 @@
+import type { Options } from "./props.js";
+
 const blockedByDT_Style = [
 	"weekday",
 	"year",
@@ -8,16 +10,12 @@ const blockedByDT_Style = [
 	"second",
 	"fractionalSecondDigits",
 	"timeZoneName",
-	"era",
+	"era"
 ];
 
 const blocksDT_Style = ["dateStyle", "timeStyle"];
 
-const DATE_OPTIONS: Record<string, {
-	values: Record<string, unknown>;
-	blocked: string[];
-	description: string;
-}> = {
+const DATE_OPTIONS: Options = {
 	"dateStyle": {
 		"values": {
 			"Full": "full",
@@ -25,19 +23,8 @@ const DATE_OPTIONS: Record<string, {
 			"Medium": "medium",
 			"Short": "short"
 		},
-		"blocked": [
-			"weekday",
-			"year",
-			"month",
-			"day",
-			"hour",
-			"minute",
-			"second",
-			"fractionalSecondDigits",
-			"timeZoneName",
-			"era"
-		],
-		"description": "Date style"
+		mutuallyExcludes: blockedByDT_Style,
+		"labelText": "Date style"
 	},
 	"timeStyle": {
 		"values": {
@@ -46,29 +33,18 @@ const DATE_OPTIONS: Record<string, {
 			"Medium": "medium",
 			"Short": "short"
 		},
-		"blocked": [
-			"weekday",
-			"year",
-			"month",
-			"day",
-			"hour",
-			"minute",
-			"second",
-			"fractionalSecondDigits",
-			"timeZoneName",
-			"era"
-		],
-		"description": "Time style"
+		mutuallyExcludes: blockedByDT_Style,
+		"labelText": "Time style"
 	},
 	"hour12": {
 		"values": {
 			"Yes": true,
 			"No": false
 		},
-		"blocked": [
+		mutuallyExcludes: [
 			"hourCycle"
 		],
-		"description": "12 Hour cycle?"
+		"labelText": "12 Hour cycle?"
 	},
 	"hourCycle": {
 		"values": {
@@ -77,8 +53,7 @@ const DATE_OPTIONS: Record<string, {
 			"23 Hours": "h23",
 			"24 Hours": "h24"
 		},
-		"blocked": [],
-		"description": "Hour cycle"
+		"labelText": "Hour cycle"
 	},
 	"era": {
 		"values": {
@@ -86,22 +61,16 @@ const DATE_OPTIONS: Record<string, {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
-		"description": "Era"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Era"
 	},
 	"year": {
 		"values": {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
-		"description": "Year"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Year"
 	},
 	"month": {
 		"values": {
@@ -111,11 +80,8 @@ const DATE_OPTIONS: Record<string, {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
-		"description": "Month"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Month"
 	},
 	"weekday": {
 		"values": {
@@ -123,66 +89,48 @@ const DATE_OPTIONS: Record<string, {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
-		"description": "Weekday"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Weekday"
 	},
 	"day": {
 		"values": {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
-		"description": "Day"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Day"
 	},
 	"timeZoneName": {
 		"values": {
 			"Long": "long",
 			"Short": "short"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
-		"description": "Timezone Name"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Timezone Name"
 	},
 	"hour": {
 		"values": {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
-		"description": "Hour"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Hour"
 	},
 	"minute": {
 		"values": {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
-		"description": "Minute"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Minute"
 	},
 	"second": {
 		"values": {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
-		"description": "Second"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Second"
 	},
 	"fractionalSecondDigits": {
 		"values": {
@@ -190,11 +138,8 @@ const DATE_OPTIONS: Record<string, {
 			"Two": 2,
 			"Three": 3
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
-		"description": "Fractional Second Digits"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Fractional Second Digits"
 	},
 	"calendar": {
 		"values": {
@@ -212,8 +157,7 @@ const DATE_OPTIONS: Record<string, {
 			"persian": "persian",
 			"roc": "roc"
 		},
-		"blocked": [],
-		"description": "Calendar"
+		"labelText": "Calendar"
 	},
 	"dayPeriod": {
 		"values": {
@@ -221,8 +165,7 @@ const DATE_OPTIONS: Record<string, {
 			"Short": "short",
 			"Long": "long"
 		},
-		"blocked": [],
-		"description": "Day Period"
+		"labelText": "Day Period"
 	},
 	"numberingSystem": {
 		"values": {
@@ -313,24 +256,21 @@ const DATE_OPTIONS: Record<string, {
 			"Warang Citi": "wara",
 			"Wancho": "wcho"
 		},
-		"blocked": [],
-		"description": "Numbering System"
+		"labelText": "Numbering System"
 	},
 	"localeMatcher": {
 		"values": {
 			"Lookup": "lookup",
 			"Best Fit": "best fit"
 		},
-		"blocked": [],
-		"description": "Locale matching algorithm"
+		"labelText": "Locale matching algorithm"
 	},
 	"formatMatcher": {
 		"values": {
 			"Lookup": "basic",
 			"Best Fit": "best fit"
 		},
-		"blocked": [],
-		"description": "Format matching algorithm"
+		"labelText": "Format matching algorithm"
 	},
 	"timeZone": {
 		"values": {
@@ -929,8 +869,7 @@ const DATE_OPTIONS: Record<string, {
 			"WET": "WET",
 			"Zulu": "Zulu"
 		},
-		"blocked": [],
-		"description": "Timezone"
+		"labelText": "Timezone"
 	}
 };
 

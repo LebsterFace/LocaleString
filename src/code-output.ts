@@ -1,3 +1,5 @@
+import { CURRENT_MODE, Mode } from "./mode-switcher.js";
+
 const previewElement = document.getElementById("preview") as HTMLHeadingElement;
 
 const editor = ace.edit("codebox");
@@ -9,28 +11,37 @@ editor.setOptions({
 	readOnly: true,
 	useWorker: false,
 	showPrintMargin: false,
-	maxLines: Infinity
+	maxLines: Infinity,
+	wrap: true
 });
 
 editor.renderer.setScrollMargin(5, 0, 0, 0);
 
-const getFormattedDate = (chosenLocale: string, formatOptions: Record<string, unknown>) =>
-	new Date().toLocaleString(
-		chosenLocale === "" ? [] : chosenLocale,
+const format = (x: Date | number, chosenLocale: string | null, formatOptions: Record<string, unknown>) =>
+	x.toLocaleString(
+		chosenLocale === null ? [] : chosenLocale,
 		formatOptions
 	);
 
-export const update = (chosenLocale: string, formatOptions: Record<string, unknown>) => {
-	const locale = chosenLocale === "" ? "[]" : `"${chosenLocale}"`;
-	const formattedDate = getFormattedDate(chosenLocale, formatOptions);
+const getFunction = () => ({
+	[Mode.DATE]: 'const formatDate = d => d',
+	[Mode.NUMBER]: 'const formatNumber = x => x',
+})[CURRENT_MODE];
 
-	previewElement.textContent = formattedDate;
+export const updatePreview = (x: number | Date | string, chosenLocale: string | null, formatOptions: Record<string, unknown> | null) => {
+	const formatted = typeof x === "string" ? x : format(x, chosenLocale, formatOptions!);
+	previewElement.textContent = formatted;
+}
 
-	editor.setValue([
-		`const formatDate = d => d.toLocaleString(${locale}, ${JSON.stringify(formatOptions, null, "\t")});`,
-		'',
-		`formatDate(new Date()) // => ${JSON.stringify(formattedDate)}`
-	].join("\n"), 1);
+export const updateCodeOutput = (chosenLocale: string | null, formatOptions: Record<string, unknown>) => {
+	editor.setOption("mode", "ace/mode/javascript");
+	const locale = chosenLocale === null ? "[]" : `"${chosenLocale}"`;
+	editor.setValue(`${getFunction()}.toLocaleString(${locale}, ${JSON.stringify(formatOptions, null, "\t")});`, 1);
+};
+
+export const displayErrorsInCodeOutput = (errors: string[]) => {
+	editor.setOption("mode", "ace/mode/text");
+	editor.setValue("Cannot generate code:\n" + errors.join('\n'), 1);
 };
 
 const scrollDown = document.getElementById("scrollDown") as HTMLButtonElement;
