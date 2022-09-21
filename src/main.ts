@@ -50,8 +50,8 @@ const optionsContainer = document.getElementById("options") as HTMLDivElement;
 const createOption = (name: string, values: Record<string, unknown>, description: string): void => {
 	const select = create("select", { name }, [
 		create("option"), // Empty <option> indicates unspecified property
-		...Object.entries(values).map(([textContent, value]) => // Each possible value for this property gets an <option> element
-			create("option", {
+		...Object.entries(values).map(([textContent, value]) =>
+			create("option", { // Each possible value for this property gets an <option> element
 				value: JSON.stringify(value),
 				textContent // Key is textContent
 			})

@@ -8,7 +8,7 @@ const blockedByDT_Style = [
 	"second",
 	"fractionalSecondDigits",
 	"timeZoneName",
-	"era",
+	"era"
 ];
 
 const blocksDT_Style = ["dateStyle", "timeStyle"];
@@ -25,18 +25,7 @@ const DATE_OPTIONS: Record<string, {
 			"Medium": "medium",
 			"Short": "short"
 		},
-		"blocked": [
-			"weekday",
-			"year",
-			"month",
-			"day",
-			"hour",
-			"minute",
-			"second",
-			"fractionalSecondDigits",
-			"timeZoneName",
-			"era"
-		],
+		"blocked": blockedByDT_Style,
 		"description": "Date style"
 	},
 	"timeStyle": {
@@ -46,18 +35,7 @@ const DATE_OPTIONS: Record<string, {
 			"Medium": "medium",
 			"Short": "short"
 		},
-		"blocked": [
-			"weekday",
-			"year",
-			"month",
-			"day",
-			"hour",
-			"minute",
-			"second",
-			"fractionalSecondDigits",
-			"timeZoneName",
-			"era"
-		],
+		"blocked": blockedByDT_Style,
 		"description": "Time style"
 	},
 	"hour12": {
@@ -86,10 +64,7 @@ const DATE_OPTIONS: Record<string, {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
+		"blocked": blocksDT_Style,
 		"description": "Era"
 	},
 	"year": {
@@ -97,10 +72,7 @@ const DATE_OPTIONS: Record<string, {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
+		"blocked": blocksDT_Style,
 		"description": "Year"
 	},
 	"month": {
@@ -111,10 +83,7 @@ const DATE_OPTIONS: Record<string, {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
+		"blocked": blocksDT_Style,
 		"description": "Month"
 	},
 	"weekday": {
@@ -123,10 +92,7 @@ const DATE_OPTIONS: Record<string, {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
+		"blocked": blocksDT_Style,
 		"description": "Weekday"
 	},
 	"day": {
@@ -134,10 +100,7 @@ const DATE_OPTIONS: Record<string, {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
+		"blocked": blocksDT_Style,
 		"description": "Day"
 	},
 	"timeZoneName": {
@@ -145,10 +108,7 @@ const DATE_OPTIONS: Record<string, {
 			"Long": "long",
 			"Short": "short"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
+		"blocked": blocksDT_Style,
 		"description": "Timezone Name"
 	},
 	"hour": {
@@ -156,10 +116,7 @@ const DATE_OPTIONS: Record<string, {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
+		"blocked": blocksDT_Style,
 		"description": "Hour"
 	},
 	"minute": {
@@ -167,10 +124,7 @@ const DATE_OPTIONS: Record<string, {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
+		"blocked": blocksDT_Style,
 		"description": "Minute"
 	},
 	"second": {
@@ -178,10 +132,7 @@ const DATE_OPTIONS: Record<string, {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
+		"blocked": blocksDT_Style,
 		"description": "Second"
 	},
 	"fractionalSecondDigits": {
@@ -190,10 +141,7 @@ const DATE_OPTIONS: Record<string, {
 			"Two": 2,
 			"Three": 3
 		},
-		"blocked": [
-			"dateStyle",
-			"timeStyle"
-		],
+		"blocked": blocksDT_Style,
 		"description": "Fractional Second Digits"
 	},
 	"calendar": {
