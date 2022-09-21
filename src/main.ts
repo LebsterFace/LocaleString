@@ -1,33 +1,9 @@
 import DATE_OPTIONS from "./date-props.js";
 import { locales } from "./locales.js";
-
-const result = document.getElementById("result") as HTMLHeadingElement;
-const optionsContainer = document.getElementById("options") as HTMLDivElement;
-const codeElement = document.getElementById("codebox") as HTMLPreElement;
+import { update } from "./code-output.js";
 
 const optionElements = new Map<string, { select: HTMLSelectElement; label: HTMLLabelElement; }>();
 const formatOptions = new Map<string, unknown>();
-
-let chosenLocale = "";
-
-const getFormattedDate = () =>
-	new Date().toLocaleString(
-		chosenLocale === "" ? [] : chosenLocale,
-		Object.fromEntries(formatOptions)
-	);
-
-const update = () => {
-	const stringifiedLocale = chosenLocale === "" ? "[]" : `"${chosenLocale}"`;
-	const stringifiedFormatOptions = JSON.stringify(
-		Object.fromEntries(formatOptions),
-		undefined,
-		"\t"
-	);
-	const formattedDate = getFormattedDate();
-
-	result.textContent = formattedDate;
-	codeElement.textContent = `const formatDate = d => d.toLocaleString(${stringifiedLocale}, ${stringifiedFormatOptions});\n\nformatDate(new Date()) // ${formattedDate}`;
-};
 
 const create = <K extends keyof HTMLElementTagNameMap>(
 	tagName: K,
@@ -40,15 +16,17 @@ const create = <K extends keyof HTMLElementTagNameMap>(
 	return element;
 };
 
+let chosenLocale = "";
 const setValue = ({ target }: Event) => {
 	if (target === null || !(target instanceof HTMLSelectElement)) return;
 	const { name, value } = target;
+	const isRemovingOption = value === "";
 
 	// 'locale' is a fake property - it actually refers to the first parameter of toLocaleString
 	if (name === "locale") {
-		chosenLocale = value;
+		if (!isRemovingOption)
+			chosenLocale = JSON.parse(value);
 	} else {
-		const isRemovingOption = value === "";
 
 		if (isRemovingOption) {
 			formatOptions.delete(name);
@@ -65,9 +43,10 @@ const setValue = ({ target }: Event) => {
 		}
 	}
 
-	update();
+	update(chosenLocale, Object.fromEntries(formatOptions));
 };
 
+const optionsContainer = document.getElementById("options") as HTMLDivElement;
 const createOption = (name: string, values: Record<string, unknown>, description: string): void => {
 	const select = create("select", { name }, [
 		create("option"), // Empty <option> indicates unspecified property
@@ -94,38 +73,4 @@ createOption("locale", locales, "Locale");
 for (const [name, { values, description }] of Object.entries(DATE_OPTIONS)) {
 	createOption(name, values, description);
 }
-
-update();
-
-const scrollDown = document.getElementById("scrollDown") as HTMLButtonElement;
-scrollDown.addEventListener("click", () => {
-	codeElement.scrollIntoView({ behavior: "smooth" });
-});
-
-const copyButton = document.getElementById("copyButton") as HTMLButtonElement;
-copyButton.addEventListener("click", () => {
-	if (navigator.clipboard) {
-		navigator.clipboard.writeText(codeElement.textContent!);
-		return;
-	} else {
-		codeElement.focus();
-
-		if ('createTextRange' in document.body) {
-			// @ts-ignore
-			const range = document.body.createTextRange();
-			range.moveToElementText(codeElement);
-			range.select();
-		} else if (window.getSelection) {
-			const selection = window.getSelection();
-			const range = document.createRange();
-			range.selectNodeContents(codeElement);
-			if (!selection) return;
-			selection.removeAllRanges();
-			selection.addRange(range);
-		}
-
-		try {
-			document.execCommand("copy");
-		} catch { }
-	}
-});
+update("", {}); // Initial update
