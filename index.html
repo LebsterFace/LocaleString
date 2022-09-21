@@ -3,26 +3,24 @@
 <!-- Date created: 24th April 2021 -->
 <!-- Date updated: 20th September 2022 -->
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.7.1/ace.js" integrity="sha512-FKkEO4RZEQjFmU1hoUYdx6HJLdpHpNzgWspgnQCxx7OOkDVz4kiGJxR97yWc5bzjwcCpJC/CRCiQzuoGYAChhQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<script type="module" src="./dist/main.js"></script>
-    </head>
-    <body>
-        <div id="main">
-            <div class="panel">
-                <h1 id="result">Loading...</h1>
-                <div id="options"></div>
-                <button id="scrollDown">See Code</button>
-            </div>
-        </div>
-        <div id="code">
-            <div id="inner" class="panel">
-                <pre id="codebox"></pre>
-                <button id="copyButton">Copy to Clipboard</button>
-            </pre>
-        </div>
-    </body>
+	</head>
+	<body>
+		<div id="main">
+			<div class="panel">
+				<h1 id="preview">Loading...</h1>
+				<div id="options"></div>
+				<button id="scrollDown">See Code</button>
+			</div>
+		</div>
+		<div id="code" class="panel">
+			<div id="codebox"></div>
+			<button id="copyButton">Copy to Clipboard</button>
+	</body>
 </html>
