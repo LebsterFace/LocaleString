@@ -1,3 +1,5 @@
+import { CURRENT_MODE, Mode } from "./mode-switcher.js";
+
 const previewElement = document.getElementById("preview") as HTMLHeadingElement;
 
 const editor = ace.edit("codebox");
@@ -14,23 +16,24 @@ editor.setOptions({
 
 editor.renderer.setScrollMargin(5, 0, 0, 0);
 
-const getFormattedDate = (chosenLocale: string, formatOptions: Record<string, unknown>) =>
-	new Date().toLocaleString(
+const format = (x: Date | number, chosenLocale: string, formatOptions: Record<string, unknown>) =>
+	x.toLocaleString(
 		chosenLocale === "" ? [] : chosenLocale,
 		formatOptions
 	);
 
-export const update = (chosenLocale: string, formatOptions: Record<string, unknown>) => {
+const getFunction = () => ({
+	[Mode.DATE]: 'const formatDate = d => d',
+	[Mode.NUMBER]: 'const formatNumber = x => x',
+})[CURRENT_MODE];
+
+export const updateCodeOutput = (x: number | Date, chosenLocale: string, formatOptions: Record<string, unknown>) => {
 	const locale = chosenLocale === "" ? "[]" : `"${chosenLocale}"`;
-	const formattedDate = getFormattedDate(chosenLocale, formatOptions);
+	const formatted = format(x, chosenLocale, formatOptions);
 
-	previewElement.textContent = formattedDate;
+	previewElement.textContent = formatted;
 
-	editor.setValue([
-		`const formatDate = d => d.toLocaleString(${locale}, ${JSON.stringify(formatOptions, null, "\t")});`,
-		'',
-		`formatDate(new Date()) // => ${JSON.stringify(formattedDate)}`
-	].join("\n"), 1);
+	editor.setValue(`${getFunction()}.toLocaleString(${locale}, ${JSON.stringify(formatOptions, null, "\t")});`, 1);
 };
 
 const scrollDown = document.getElementById("scrollDown") as HTMLButtonElement;

@@ -8,14 +8,27 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="tooltips.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.7.1/ace.js" integrity="sha512-FKkEO4RZEQjFmU1hoUYdx6HJLdpHpNzgWspgnQCxx7OOkDVz4kiGJxR97yWc5bzjwcCpJC/CRCiQzuoGYAChhQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<script type="module" src="./dist/main.js"></script>
 	</head>
 	<body>
+		<label id="mode">
+			Mode
+			<select>
+				<option value="date">Date</option>
+				<option value="number">Number</option>
+			</select>
+		</label>
 		<div id="main">
 			<div class="panel">
 				<h1 id="preview">Loading...</h1>
-				<div id="options"></div>
+				<div id="options">
+					<div id="test-value" class="option">
+						<label>Test value</label>
+						<input value="123456.789" placeholder="Number">
+					</div>
+				</div>
 				<button id="scrollDown">See Code</button>
 			</div>
 		</div>

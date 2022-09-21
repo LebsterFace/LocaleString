@@ -4,15 +4,42 @@
 :root {
 	--code-font: JetBrains Mono, Inconsolata, Fira Code, monospace;
 	--dracula-background: #282A36;
+	--tooltip-color: dodgerblue;
 
 	--main-background: #302D42;
 	--panel-color: #242331;
 	--dropdown-color: #38354a;
+	--shadow-color: rgb(0 0 0 / 75%);
+}
+
+:root[data-mode="number"] {
+	--main-background: #2D3542;
+	--panel-color: #232931;
+	--dropdown-color: #353D4A;
+}
+
+:root[data-mode="date"] #test-value {
+	display: none;
+	visibility: hidden;
 }
 
 body {
     background-color: var(--main-background);
 	margin: 0;
+    font-family: Roboto, sans-serif;
+    color: white;
+}
+
+#mode {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	border: 1px solid var(--panel-color);
+	padding: 0px 5px;
+}
+
+#mode, #mode select {
+	font-size: 1.25rem;
 }
 
 #preview {
@@ -23,6 +50,7 @@ body {
     line-height: 1.25em;
     font-size: 2.5rem;
 	margin: 0.25em 0 0.5em 0;
+	word-break: break-all;
 }
 
 #scrollDown {
@@ -35,7 +63,7 @@ body {
     outline: none;
     border-radius: 5px;
     background-color: limegreen;
-    box-shadow: rgb(0 0 0 / 75%) 0px 0px 10px 0px;
+    box-shadow: var(--shadow-color) 0px 0px 10px 0px;
     cursor: pointer;
 }
 
@@ -44,7 +72,7 @@ body {
     margin-top: 4px;
 }
 
-.option select {
+select, .option input {
     background-color: var(--dropdown-color);
     border: none;
     outline: none;
@@ -60,7 +88,7 @@ body {
     margin: auto;
 }
 
-.option label.disabled {
+.option.disabled label, .option.disabled select {
     color: gray;
     text-decoration: line-through;
 }
@@ -76,7 +104,6 @@ body {
     background: dodgerblue;
     border-radius: 0px 0px 0px 5px;
     font-weight: bold;
-/*    box-shadow: rgb(0 0 0 / 75%) 0px 0px 10px 0px;*/
     cursor: pointer;
 }
 
@@ -90,11 +117,9 @@ body {
 .panel {
     width: 760px;
     padding: 20px;
-    box-shadow: rgba(0, 0, 0, 0.85) 15px 15px 30px 0px;
+    box-shadow: var(--shadow-color) 15px 15px 30px 0px;
     box-sizing: border-box;
     border-radius: 10px;
-    font-family: Roboto, sans-serif;
-    color: white;
     background-color: var(--panel-color);
     margin: auto;
 }
@@ -104,7 +129,7 @@ body {
     display: flex;
     box-sizing: border-box;
 }
-
+/* 
 @media only screen and (max-width: 780px) {
     .option {
         flex-direction: column;
@@ -154,4 +179,4 @@ body {
         margin-bottom: 5px;
         font-size: 1.2em;
     }
-}
+} */
