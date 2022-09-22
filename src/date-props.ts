@@ -23,8 +23,8 @@ const DATE_OPTIONS: Options = {
 			"Medium": "medium",
 			"Short": "short"
 		},
-		cannotBeUsedWithOptions: blockedByDT_Style,
-		"label": "Date style"
+		mutuallyExcludes: blockedByDT_Style,
+		"labelText": "Date style"
 	},
 	"timeStyle": {
 		"values": {
@@ -33,18 +33,18 @@ const DATE_OPTIONS: Options = {
 			"Medium": "medium",
 			"Short": "short"
 		},
-		cannotBeUsedWithOptions: blockedByDT_Style,
-		"label": "Time style"
+		mutuallyExcludes: blockedByDT_Style,
+		"labelText": "Time style"
 	},
 	"hour12": {
 		"values": {
 			"Yes": true,
 			"No": false
 		},
-		cannotBeUsedWithOptions: [
+		mutuallyExcludes: [
 			"hourCycle"
 		],
-		"label": "12 Hour cycle?"
+		"labelText": "12 Hour cycle?"
 	},
 	"hourCycle": {
 		"values": {
@@ -53,7 +53,7 @@ const DATE_OPTIONS: Options = {
 			"23 Hours": "h23",
 			"24 Hours": "h24"
 		},
-		"label": "Hour cycle"
+		"labelText": "Hour cycle"
 	},
 	"era": {
 		"values": {
@@ -61,16 +61,16 @@ const DATE_OPTIONS: Options = {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		cannotBeUsedWithOptions: blocksDT_Style,
-		"label": "Era"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Era"
 	},
 	"year": {
 		"values": {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		cannotBeUsedWithOptions: blocksDT_Style,
-		"label": "Year"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Year"
 	},
 	"month": {
 		"values": {
@@ -80,8 +80,8 @@ const DATE_OPTIONS: Options = {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		cannotBeUsedWithOptions: blocksDT_Style,
-		"label": "Month"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Month"
 	},
 	"weekday": {
 		"values": {
@@ -89,48 +89,48 @@ const DATE_OPTIONS: Options = {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		cannotBeUsedWithOptions: blocksDT_Style,
-		"label": "Weekday"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Weekday"
 	},
 	"day": {
 		"values": {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		cannotBeUsedWithOptions: blocksDT_Style,
-		"label": "Day"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Day"
 	},
 	"timeZoneName": {
 		"values": {
 			"Long": "long",
 			"Short": "short"
 		},
-		cannotBeUsedWithOptions: blocksDT_Style,
-		"label": "Timezone Name"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Timezone Name"
 	},
 	"hour": {
 		"values": {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		cannotBeUsedWithOptions: blocksDT_Style,
-		"label": "Hour"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Hour"
 	},
 	"minute": {
 		"values": {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		cannotBeUsedWithOptions: blocksDT_Style,
-		"label": "Minute"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Minute"
 	},
 	"second": {
 		"values": {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		cannotBeUsedWithOptions: blocksDT_Style,
-		"label": "Second"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Second"
 	},
 	"fractionalSecondDigits": {
 		"values": {
@@ -138,8 +138,8 @@ const DATE_OPTIONS: Options = {
 			"Two": 2,
 			"Three": 3
 		},
-		cannotBeUsedWithOptions: blocksDT_Style,
-		"label": "Fractional Second Digits"
+		mutuallyExcludes: blocksDT_Style,
+		"labelText": "Fractional Second Digits"
 	},
 	"calendar": {
 		"values": {
@@ -157,7 +157,7 @@ const DATE_OPTIONS: Options = {
 			"persian": "persian",
 			"roc": "roc"
 		},
-		"label": "Calendar"
+		"labelText": "Calendar"
 	},
 	"dayPeriod": {
 		"values": {
@@ -165,7 +165,7 @@ const DATE_OPTIONS: Options = {
 			"Short": "short",
 			"Long": "long"
 		},
-		"label": "Day Period"
+		"labelText": "Day Period"
 	},
 	"numberingSystem": {
 		"values": {
@@ -256,21 +256,21 @@ const DATE_OPTIONS: Options = {
 			"Warang Citi": "wara",
 			"Wancho": "wcho"
 		},
-		"label": "Numbering System"
+		"labelText": "Numbering System"
 	},
 	"localeMatcher": {
 		"values": {
 			"Lookup": "lookup",
 			"Best Fit": "best fit"
 		},
-		"label": "Locale matching algorithm"
+		"labelText": "Locale matching algorithm"
 	},
 	"formatMatcher": {
 		"values": {
 			"Lookup": "basic",
 			"Best Fit": "best fit"
 		},
-		"label": "Format matching algorithm"
+		"labelText": "Format matching algorithm"
 	},
 	"timeZone": {
 		"values": {
@@ -869,7 +869,7 @@ const DATE_OPTIONS: Options = {
 			"WET": "WET",
 			"Zulu": "Zulu"
 		},
-		"label": "Timezone"
+		"labelText": "Timezone"
 	}
 };
 

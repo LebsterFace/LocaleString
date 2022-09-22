@@ -24,10 +24,10 @@
 }
 
 body {
-    background-color: var(--main-background);
+	background-color: var(--main-background);
 	margin: 0;
-    font-family: Roboto, sans-serif;
-    color: white;
+	font-family: Roboto, sans-serif;
+	color: white;
 }
 
 #mode {
@@ -38,97 +38,114 @@ body {
 	padding: 0px 5px;
 }
 
-#mode, #mode select {
+#mode,
+#mode select {
 	font-size: 1.25rem;
 }
 
 #preview {
-    font-family: Montserrat, sans-serif;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 24px;
-    line-height: 1.25em;
-    font-size: 2.5rem;
+	font-family: Montserrat, sans-serif;
+	font-weight: 700;
+	text-align: center;
+	margin-bottom: 24px;
+	line-height: 1.25em;
+	font-size: 2.5rem;
 	margin: 0.25em 0 0.5em 0;
 	word-break: break-all;
 }
 
 #scrollDown {
-    width: 100%;
-    margin-top: 20px;
-    padding: 10px;
-    font-size: 1.25rem;
-    color: white;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    background-color: limegreen;
-    box-shadow: var(--shadow-color) 0px 0px 10px 0px;
-    cursor: pointer;
+	width: 100%;
+	margin-top: 20px;
+	padding: 10px;
+	font-size: 1.25rem;
+	color: white;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+	background-color: limegreen;
+	box-shadow: var(--shadow-color) 0px 0px 10px 0px;
+	cursor: pointer;
 }
 
 .option {
-    display: flex;
-    margin-top: 4px;
+	display: flex;
+	margin-top: 6px;
+	padding-left: 10px;
 }
 
-select, .option input {
-    background-color: var(--dropdown-color);
-    border: none;
-    outline: none;
-    color: inherit;
-    padding: 5px;
-    flex: 1;
-    border-radius: 2px;
+select,
+.option input {
+	background-color: var(--dropdown-color);
+	border: none;
+	outline: none;
+	color: inherit;
+	padding: 5px;
+	flex: 1;
+	border-radius: 2px;
 }
 
 .option label {
-    flex: 1;
-    transition: color 200ms ease;
-    margin: auto;
+	flex: 1;
+	transition: color 200ms ease;
+	margin: auto;
 }
 
-.option.disabled label, .option.disabled select {
-    color: gray;
-    text-decoration: line-through;
+.option {
+	transition: box-shadow 200ms ease;
+}
+
+.option.invalid:not(.disabled) {
+	box-shadow: #ff3c3c 0px 0px 3px 2px;
+}
+
+.option.invalid:not(.disabled) label {
+	color: #ff3c3c;
+}
+
+.option.disabled label,
+.option.disabled select {
+	color: gray;
+	text-decoration: line-through;
 }
 
 #copyButton {
-    position: absolute;
-    padding: 5px;
-    top: 0px;
-    right: 0px;
-    border: none;
-    outline: none;
-    color: white;
-    background: dodgerblue;
-    border-radius: 0px 0px 0px 5px;
-    font-weight: bold;
-    cursor: pointer;
+	position: absolute;
+	padding: 5px;
+	top: 0px;
+	right: 0px;
+	border: none;
+	outline: none;
+	color: white;
+	background: dodgerblue;
+	border-radius: 0px 0px 0px 5px;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 #code {
-    margin-top: 30px;
-    margin-bottom: 50px;
+	margin-top: 30px;
+	margin-bottom: 50px;
 	position: relative;
 	background-color: var(--dracula-background);
 }
 
 .panel {
-    width: 760px;
-    padding: 20px;
-    box-shadow: var(--shadow-color) 15px 15px 30px 0px;
-    box-sizing: border-box;
-    border-radius: 10px;
-    background-color: var(--panel-color);
-    margin: auto;
+	width: 760px;
+	padding: 10px;
+	box-shadow: var(--shadow-color) 15px 15px 30px 0px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	background-color: var(--panel-color);
+	margin: auto;
 }
 
 #main {
-    height: 100vh;
-    display: flex;
-    box-sizing: border-box;
+	height: 100vh;
+	display: flex;
+	box-sizing: border-box;
 }
+
 /* 
 @media only screen and (max-width: 780px) {
     .option {

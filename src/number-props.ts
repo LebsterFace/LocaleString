@@ -6,10 +6,11 @@ const NUMBER_OPTIONS: Options = {
 			"Short": "short",
 			"Long": "long"
 		},
-		label: "Compact Display",
+		labelText: "Compact Display",
 		usageCondition: {
 			prerequisite: { name: "notation", value: "compact" },
-			notRequired: true
+			message: "Has no effect unless 'Notation' option is 'Compact'",
+			optional: true
 		}
 	},
 	currency: {
@@ -191,20 +192,29 @@ const NUMBER_OPTIONS: Options = {
 			"Zambian kwacha": "ZMW",
 			"Zimbabwean dollar": "ZWL"
 		},
-		label: "Currency",
+		labelText: "Currency",
 		usageCondition: {
 			prerequisite: { name: "style", value: "currency" },
-			invalidUsage: "Currency option must be specified if and only if 'Formatting Style' is set to 'Currency'"
+			message: "Currency option must be specified if and only if 'Formatting Style' is set to 'Currency'"
 		}
 	},
 	style: {
-		label: "Formatting style",
+		labelText: "Formatting style",
 		values: {
 			"Decimal": "decimal",
 			"Currency": "currency",
 			"Percent": "percent",
 			"Unit": "unit"
 		}
+	},
+	notation: {
+		values: {
+			"Standard": "standard",
+			"Scientific": "scientific",
+			"Engineering": "engineering",
+			"Compact": "compact"
+		},
+		labelText: "Notation"
 	}
 };
 

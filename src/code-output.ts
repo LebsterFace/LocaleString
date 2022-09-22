@@ -11,14 +11,15 @@ editor.setOptions({
 	readOnly: true,
 	useWorker: false,
 	showPrintMargin: false,
-	maxLines: Infinity
+	maxLines: Infinity,
+	wrap: true
 });
 
 editor.renderer.setScrollMargin(5, 0, 0, 0);
 
-const format = (x: Date | number, chosenLocale: string, formatOptions: Record<string, unknown>) =>
+const format = (x: Date | number, chosenLocale: string | null, formatOptions: Record<string, unknown>) =>
 	x.toLocaleString(
-		chosenLocale === "" ? [] : chosenLocale,
+		chosenLocale === null ? [] : chosenLocale,
 		formatOptions
 	);
 
@@ -27,13 +28,20 @@ const getFunction = () => ({
 	[Mode.NUMBER]: 'const formatNumber = x => x',
 })[CURRENT_MODE];
 
-export const updateCodeOutput = (x: number | Date, chosenLocale: string, formatOptions: Record<string, unknown>) => {
-	const locale = chosenLocale === "" ? "[]" : `"${chosenLocale}"`;
-	const formatted = format(x, chosenLocale, formatOptions);
-
+export const updatePreview = (x: number | Date | string, chosenLocale: string | null, formatOptions: Record<string, unknown> | null) => {
+	const formatted = typeof x === "string" ? x : format(x, chosenLocale, formatOptions!);
 	previewElement.textContent = formatted;
+}
 
+export const updateCodeOutput = (chosenLocale: string | null, formatOptions: Record<string, unknown>) => {
+	editor.setOption("mode", "ace/mode/javascript");
+	const locale = chosenLocale === null ? "[]" : `"${chosenLocale}"`;
 	editor.setValue(`${getFunction()}.toLocaleString(${locale}, ${JSON.stringify(formatOptions, null, "\t")});`, 1);
+};
+
+export const displayErrorsInCodeOutput = (errors: string[]) => {
+	editor.setOption("mode", "ace/mode/text");
+	editor.setValue("Cannot generate code:\n" + errors.join('\n'), 1);
 };
 
 const scrollDown = document.getElementById("scrollDown") as HTMLButtonElement;
