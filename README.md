@@ -1,5 +1,5 @@
 # `toLocaleString` Generator
-Automatically generate code to format JavaScript <code>Date</code> objects or <code>number<code> values.
+Automatically generate code to format JavaScript `Date` objects or `number` values.
 
 ## **[Try it online!](https://lebster.xyz/projects/localestring)**
 
