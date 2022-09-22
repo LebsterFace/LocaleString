@@ -3,18 +3,15 @@ import type { Options } from "./props.js";
 const UNIT_VALUES = { "Acre": "acre", "Bit": "bit", "Byte": "byte", "Celsius": "celsius", "Centimeter": "centimeter", "Day": "day", "Degree": "degree", "Fahrenheit": "fahrenheit", "Fluid-ounce": "fluid-ounce", "Foot": "foot", "Gallon": "gallon", "Gigabit": "gigabit", "Gigabyte": "gigabyte", "Gram": "gram", "Hectare": "hectare", "Hour": "hour", "Inch": "inch", "Kilobit": "kilobit", "Kilobyte": "kilobyte", "Kilogram": "kilogram", "Kilometer": "kilometer", "Liter": "liter", "Megabit": "megabit", "Megabyte": "megabyte", "Meter": "meter", "Mile": "mile", "Mile-scandinavian": "mile-scandinavian", "Milliliter": "milliliter", "Millimeter": "millimeter", "Millisecond": "millisecond", "Minute": "minute", "Month": "month", "Ounce": "ounce", "Percent": "percent", "Petabyte": "petabyte", "Pound": "pound", "Second": "second", "Stone": "stone", "Terabit": "terabit", "Terabyte": "terabyte", "Week": "week", "Yard": "yard", "Year": "year" };
 
 const NUMBER_OPTIONS: Options = {
-	compactDisplay: {
+	style: {
+		labelText: "Formatting style",
 		values: {
-			"Short": "short",
-			"Long": "long"
+			"Decimal": "decimal",
+			"Currency": "currency",
+			"Percent": "percent",
+			"Unit": "unit"
 		},
-		defaultValue: "short",
-		labelText: "Compact Display",
-		usageCondition: {
-			prerequisite: { name: "notation", value: "compact" },
-			message: "Has no effect unless 'Notation' option is 'Compact'",
-			optional: true
-		}
+		defaultValue: "decimal"
 	},
 	currency: {
 		values: {
@@ -239,6 +236,19 @@ const NUMBER_OPTIONS: Options = {
 		defaultValue: "standard",
 		labelText: "Notation"
 	},
+	compactDisplay: {
+		values: {
+			"Short": "short",
+			"Long": "long"
+		},
+		defaultValue: "short",
+		labelText: "Compact Display",
+		usageCondition: {
+			prerequisite: { name: "notation", value: "compact" },
+			message: "Has no effect unless 'Notation' option is 'Compact'",
+			optional: true
+		}
+	},
 	signDisplay: {
 		values: {
 			"Automatic": "auto",
@@ -249,16 +259,6 @@ const NUMBER_OPTIONS: Options = {
 		},
 		defaultValue: "auto",
 		labelText: "Sign Display"
-	},
-	style: {
-		labelText: "Formatting style",
-		values: {
-			"Decimal": "decimal",
-			"Currency": "currency",
-			"Percent": "percent",
-			"Unit": "unit"
-		},
-		defaultValue: "decimal"
 	},
 	unit: {
 		labelText: "Unit",
