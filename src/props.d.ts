@@ -1,5 +1,6 @@
 type Option = ({
 	values: Record<string, unknown>;
+	defaultValue?: string;
 	labelText: string;
 	mutuallyExcludes?: string[];
 	usageCondition?: {

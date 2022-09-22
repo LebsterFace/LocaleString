@@ -4,21 +4,20 @@ import { locales } from "./locales.js";
 import { displayErrorsInCodeOutput, updateCodeOutput, updatePreview } from "./code-output.js";
 import { CURRENT_MODE, Mode } from "./mode-switcher.js";
 import { Option } from "./props.js";
+import COMMON_PROPS from "./common-props.js";
 
 const create = <K extends keyof HTMLElementTagNameMap>(
 	tagName: K,
 	attributes: Record<string, unknown> = {},
-	children: HTMLElement[] = []
 ): HTMLElementTagNameMap[K] => {
 	const element = document.createElement(tagName);
 	Object.assign(element, attributes);
-	element.append(...children);
 	return element;
 };
 
 const OPTIONS = {
-	[Mode.DATE]: DATE_OPTIONS,
-	[Mode.NUMBER]: NUMBER_OPTIONS,
+	[Mode.DATE]: { ...DATE_OPTIONS, ...COMMON_PROPS },
+	[Mode.NUMBER]: { ...NUMBER_OPTIONS, ...COMMON_PROPS },
 }[CURRENT_MODE];
 
 const inputElement = document.querySelector("#main input") as HTMLInputElement;
@@ -120,6 +119,11 @@ const update = () => {
 			[...formatOptions.entries()]
 				.filter(([key, value]) => !optionElements.get(key)!.select.disabled)
 		);
+
+		if (opts.unit && unitPer !== null) {
+			opts.unit += '-per-' + unitPer;
+		}
+
 		updatePreview(inputValue(), chosenLocale, opts);
 		updateCodeOutput(chosenLocale, opts);
 	} else {
@@ -129,14 +133,27 @@ const update = () => {
 };
 
 let chosenLocale: string | null = null;
+let unitPer: string | null = null;
+const SPECIAL_HANDLERS: Record<string, (value: string | null) => void> = {
+	// First parameter of toLocaleString
+	locale: value => {
+		chosenLocale = value;
+	},
+
+	// '-per-{unit}' suffix for the 'unit' option
+	unitPer: value => {
+		unitPer = value;
+	}
+};
+
 const setValue = ({ target }: Event) => {
 	if (target === null || !(target instanceof HTMLSelectElement)) return;
 	const { name, value } = target;
 	const isRemovingOption = value === "";
 
-	// 'locale' is a fake option - it actually refers to the first parameter of toLocaleString
-	if (name === "locale") {
-		chosenLocale = isRemovingOption ? null : JSON.parse(value);
+	const handler = SPECIAL_HANDLERS[name];
+	if (handler) {
+		handler(isRemovingOption ? null : JSON.parse(value));
 	} else if (isRemovingOption) {
 		formatOptions.delete(name);
 	} else {
@@ -151,22 +168,28 @@ const createOption = (name: string, option: Option): OptionWrapper => {
 	const select = create("select", {
 		name,
 		required: option.usageCondition?.optional ?? false
-	}, [
-		create("option"), // Empty <option> indicates unspecified property
-		...Object.entries(option.values).map(([textContent, value]) =>
+	});
+
+	if (!option.defaultValue) {
+		// Empty <option> to indicate non-specified property
+		select.append(create("option"));
+	}
+
+	select.append(
+		...Object.entries(option.values).map(([key, value]) =>
 			create("option", { // Each possible value for this property gets an <option> element
-				value: JSON.stringify(value),
-				textContent // Key is textContent
+				value: option.defaultValue === value ? '' : JSON.stringify(value),
+				textContent: option.defaultValue === value ? `${key} (Default)` : key,
+				selected: option.defaultValue === value
 			})
-		),
-	]);
+		));
+
+	// if (option.defaultValue) select.value = option.defaultValue;
 	select.addEventListener("input", setValue);
 
 	const label = create("label", { textContent: option.labelText });
-	const container = create("div", { className: "option" }, [
-		label,
-		select
-	]);
+	const container = create("div", { className: "option" });
+	container.append(label, select);
 
 	optionsContainer.append(container);
 

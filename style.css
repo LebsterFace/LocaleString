@@ -28,6 +28,8 @@ body {
 	margin: 0;
 	font-family: Roboto, sans-serif;
 	color: white;
+	display: flex;
+	flex-direction: column;
 }
 
 #mode {
@@ -70,7 +72,7 @@ body {
 
 .option {
 	display: flex;
-	margin-top: 6px;
+	padding: 3px 0;
 	padding-left: 10px;
 }
 
@@ -93,6 +95,7 @@ select,
 
 .option {
 	transition: box-shadow 200ms ease;
+	border-bottom: 1px solid rgb(0 0 0 / 20%);
 }
 
 .option.invalid:not(.disabled) {
@@ -141,7 +144,8 @@ select,
 }
 
 #main {
-	height: 100vh;
+	min-height: 100vh;
+	flex: 1;
 	display: flex;
 	box-sizing: border-box;
 }

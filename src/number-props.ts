@@ -1,11 +1,14 @@
 import type { Options } from "./props.js";
 
+const UNIT_VALUES = { "Acre": "acre", "Bit": "bit", "Byte": "byte", "Celsius": "celsius", "Centimeter": "centimeter", "Day": "day", "Degree": "degree", "Fahrenheit": "fahrenheit", "Fluid-ounce": "fluid-ounce", "Foot": "foot", "Gallon": "gallon", "Gigabit": "gigabit", "Gigabyte": "gigabyte", "Gram": "gram", "Hectare": "hectare", "Hour": "hour", "Inch": "inch", "Kilobit": "kilobit", "Kilobyte": "kilobyte", "Kilogram": "kilogram", "Kilometer": "kilometer", "Liter": "liter", "Megabit": "megabit", "Megabyte": "megabyte", "Meter": "meter", "Mile": "mile", "Mile-scandinavian": "mile-scandinavian", "Milliliter": "milliliter", "Millimeter": "millimeter", "Millisecond": "millisecond", "Minute": "minute", "Month": "month", "Ounce": "ounce", "Percent": "percent", "Petabyte": "petabyte", "Pound": "pound", "Second": "second", "Stone": "stone", "Terabit": "terabit", "Terabyte": "terabyte", "Week": "week", "Yard": "yard", "Year": "year" };
+
 const NUMBER_OPTIONS: Options = {
 	compactDisplay: {
 		values: {
 			"Short": "short",
 			"Long": "long"
 		},
+		defaultValue: "short",
 		labelText: "Compact Display",
 		usageCondition: {
 			prerequisite: { name: "notation", value: "compact" },
@@ -195,16 +198,35 @@ const NUMBER_OPTIONS: Options = {
 		labelText: "Currency",
 		usageCondition: {
 			prerequisite: { name: "style", value: "currency" },
-			message: "Currency option must be specified if and only if 'Formatting Style' is set to 'Currency'"
+			message: "Must be specified if and only if 'Formatting Style' is 'Currency'"
 		}
 	},
-	style: {
-		labelText: "Formatting style",
+	currencyDisplay: {
 		values: {
-			"Decimal": "decimal",
-			"Currency": "currency",
-			"Percent": "percent",
-			"Unit": "unit"
+			"Currency symbol": "symbol",
+			"Narrow format symbol": "narrowSymbol",
+			"ISO currency code": "code",
+			"Currency name": "name",
+		},
+		defaultValue: "symbol",
+		labelText: "Currency Display",
+		usageCondition: {
+			prerequisite: { name: "style", value: "currency" },
+			message: "Has no effect unless 'Formatting Style' is 'Currency'",
+			optional: true
+		}
+	},
+	currencySign: {
+		values: {
+			"Standard": "standard",
+			"Accounting": "accounting"
+		},
+		defaultValue: "standard",
+		labelText: "Currency Sign",
+		usageCondition: {
+			prerequisite: { name: "style", value: "currency" },
+			message: "Has no effect unless 'Formatting Style' is 'Currency'",
+			optional: true
 		}
 	},
 	notation: {
@@ -214,8 +236,110 @@ const NUMBER_OPTIONS: Options = {
 			"Engineering": "engineering",
 			"Compact": "compact"
 		},
+		defaultValue: "standard",
 		labelText: "Notation"
-	}
+	},
+	signDisplay: {
+		values: {
+			"Automatic": "auto",
+			"Always": "always",
+			"Except Zero": "exceptZero",
+			"Never": "never",
+			"Negative Only": "negative"
+		},
+		defaultValue: "auto",
+		labelText: "Sign Display"
+	},
+	style: {
+		labelText: "Formatting style",
+		values: {
+			"Decimal": "decimal",
+			"Currency": "currency",
+			"Percent": "percent",
+			"Unit": "unit"
+		},
+		defaultValue: "decimal"
+	},
+	unit: {
+		labelText: "Unit",
+		values: UNIT_VALUES,
+		usageCondition: {
+			prerequisite: { name: "style", value: "unit" },
+			message: "Must be specified if and only if 'Formatting Style' is 'Unit'"
+		},
+	},
+	unitPer: {
+		labelText: "Unit Per",
+		values: UNIT_VALUES,
+		usageCondition: {
+			prerequisite: { name: "style", value: "unit" },
+			message: "Has no effect unless 'Formatting Style' is 'Unit'",
+			optional: true
+		},
+	},
+	unitDisplay: {
+		labelText: "Unit Display",
+		values: {
+			"Short": "short",
+			"Long": "long",
+			"Narrow": "narrow"
+		},
+		defaultValue: "short",
+		usageCondition: {
+			prerequisite: { name: "style", value: "unit" },
+			message: "Has no effect unless 'Formatting Style' is 'Unit'",
+			optional: true
+		}
+	},
+	useGrouping: {
+		labelText: "Use grouping separators?",
+		values: {
+			"Automatic": "auto",
+			"Always": "always",
+			"No": false,
+			"Minimum 2 digits": "min2"
+		},
+		defaultValue: "auto"
+	},
+	roundingMode: {
+		labelText: "Rounding Mode",
+		values: {
+			"Ceil (round toward +∞)": "ceil",
+			"Floor (round toward -∞)": "floor",
+			"Expand (round away from 0)": "expand",
+			"Truncate (round toward 0)": "trunc",
+			"Half-Ceil (ties toward +∞)": "halfCeil",
+			"Half-Floor (ties toward -∞)": "halfFloor",
+			"Half-Expand (ties away from 0)": "halfExpand",
+			"Half-Trunc (ties toward 0)": "halfTrunc",
+			"Half-Even (ties towards the nearest even integer)": "halfEven",
+		},
+		defaultValue: "halfExpand"
+	},
+	// roundingPriority: {
+	// 	labelText: "Rounding Priority",
+	// 	// FIXME: if both "FractionDigits" (minimumFractionDigits/maximumFractionDigits) and "SignificantDigits" (minimumSignificantDigits/maximumSignificantDigits) are specified:
+	// 	values: {
+	// 		"Automatic": "auto", //: the result from the significant digits property is used (default).
+	// 		"More Precision": "morePrecision", //: the result from the property that results in more precision is used.
+	// 		"Less Precision": "lessPrecision", //: the result from the property that results in less precision is used.
+	// 	},
+	// 	defaultValue: "auto"
+	// },
+	// roundingIncrement: {
+	// 	// FIXME: Cannot be mixed with significant-digits rounding or any setting of roundingPriority other than auto.
+	// 	labelText: "Roudning Increment",
+	// 	values: { "1": 1, "2": 2, "5": 5, "10": 10, "20": 20, "25": 25, "50": 50, "100": 100, "200": 200, "250": 250, "500": 500, "1000": 1000, "2000": 2000, "2500": 2500, "5000": 5000 }
+	// },
+	trailingZeroDisplay: {
+		labelText: "Trailing Zero Display",
+		values: {
+			"Automatic": "auto",
+			"Strip if integer": "stripIfInteger",
+		},
+		defaultValue: "auto"
+	},
+	// FIXME: [minimumIntegerDigits, minimumFractionDigits, maximumFractionDigits, minimumSignificantDigits, maximumSignificantDigits]
 };
 
 export default NUMBER_OPTIONS;
