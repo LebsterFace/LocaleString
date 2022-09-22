@@ -103,7 +103,11 @@ const DATE_OPTIONS: Options = {
 	"timeZoneName": {
 		"values": {
 			"Long": "long",
-			"Short": "short"
+			"Short": "short",
+			"Short Offset": "shortOffset",
+			"Long Offset": "longOffset",
+			"Short Generic": "shortGeneric",
+			"Long Generic": "longGeneric",
 		},
 		mutuallyExcludes: blocksDT_Style,
 		"labelText": "Timezone Name"
@@ -169,9 +173,10 @@ const DATE_OPTIONS: Options = {
 	},
 	"formatMatcher": {
 		"values": {
-			"Lookup": "basic",
+			"Basic": "basic",
 			"Best Fit": "best fit"
 		},
+		defaultValue: "best fit",
 		"labelText": "Format matching algorithm"
 	},
 	"timeZone": {
