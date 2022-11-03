@@ -30,7 +30,7 @@ const getFunction = () => ({
 
 const stringifyObject = (x: unknown): string =>
 	JSON.stringify(x, null, "\t")
-		.replaceAll(/(?<=^\t+)"((?:[$_\p{ID_Start}])(?:[$_\u200C\u200D\p{ID_Continue}])*)"(?=: )/ugm, "$1");
+		.replaceAll(/(^\t+)"((?:[$_\p{ID_Start}])(?:[$_\u200C\u200D\p{ID_Continue}])*)"(?=: )/ugm, "$1$2");
 
 export const updatePreview = (x: number | Date | string, chosenLocale: string | null, formatOptions: Record<string, unknown> | null) => {
 	const formatted = typeof x === "string" ? x : format(x, chosenLocale, formatOptions!);
