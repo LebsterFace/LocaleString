@@ -5,7 +5,7 @@ type Option = ({
 	mutuallyExcludes?: string[];
 	usageCondition?: {
 		/** prerequisite property & value */
-		prerequisite: { name: string, value: unknown; };
+		prerequisite: { name: string; value: unknown; };
 		// /** When this option was specified yet the prerequisite option was not */
 		// prohibitedUsage: string;
 		// /** When the prerequisite option was specified yet this option was not */

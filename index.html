@@ -1,34 +1,29 @@
 <!DOCTYPE html>
-<!-- Website designed by "Lebster" -->
+<!-- Website designed by Lebster -->
 <!-- Date created: 24th April 2021 -->
-<!-- Date updated: 22nd September 2022 -->
+<!-- Date updated: 29th August 2026 -->
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>toLocaleString Generator</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.44.0/ace.min.js" integrity="sha512-nX2VMiv7R3QlrD1gIskPrBThnEgNbKxfzD1kOMm/cNaeHBt05SlNhNtxMeBHzcXV1DJ/Y1eTzE136o+1Ezu9/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="tooltips.css">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.7.1/ace.js" integrity="sha512-FKkEO4RZEQjFmU1hoUYdx6HJLdpHpNzgWspgnQCxx7OOkDVz4kiGJxR97yWc5bzjwcCpJC/CRCiQzuoGYAChhQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		<script type="module" src="./dist/main.js"></script>
-		<!-- Primary Meta Tags -->
-		<title>toLocaleString Generator</title>
+		<script type="module" src="dist/main.js"></script>
 		<meta name="title" content="toLocaleString Generator">
 		<meta name="description" content="Generate JS to format dates or numbers">
-
-		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website">
 		<meta property="og:url" content="https://lebster.xyz/projects/localestring/">
 		<meta property="og:title" content="toLocaleString Generator">
 		<meta property="og:description" content="Generate JS to format dates or numbers">
-		<meta property="og:image" content="">
-
-		<!-- Twitter -->
+		<meta property="og:image" content="https://lebster.xyz/projects/localestring/preview.png">
 		<meta property="twitter:card" content="summary_large_image">
 		<meta property="twitter:url" content="https://lebster.xyz/projects/localestring/">
 		<meta property="twitter:title" content="toLocaleString Generator">
 		<meta property="twitter:description" content="Generate JS to format dates or numbers">
-		<meta property="twitter:image" content="">
+		<meta property="twitter:image" content="https://lebster.xyz/projects/localestring/preview.png">
+		<link rel="shortcut icon" href="favicon.svg">
 	</head>
 	<body>
 		<label id="mode">
@@ -47,11 +42,12 @@
 						<input value="123456.789" placeholder="Number">
 					</div>
 				</div>
-				<button id="scrollDown">See Code</button>
+				<button id="scroll-down">See Code</button>
 			</div>
 		</div>
 		<div id="code" class="panel">
 			<div id="codebox"></div>
-			<button id="copyButton">Copy to Clipboard</button>
+			<button id="copy">Copy to Clipboard</button>
+		</div>
 	</body>
 </html>

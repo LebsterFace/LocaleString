@@ -1,8 +1,9 @@
 import { CURRENT_MODE, Mode } from "./mode-switcher.js";
+declare const ace: typeof import("ace-builds");
 
 const previewElement = document.getElementById("preview") as HTMLHeadingElement;
-
 const editor = ace.edit("codebox");
+
 editor.setOptions({
 	theme: "ace/theme/dracula",
 	mode: "ace/mode/javascript",
@@ -17,20 +18,18 @@ editor.setOptions({
 
 editor.renderer.setScrollMargin(5, 0, 0, 0);
 
-const format = (x: Date | number, chosenLocale: string | null, formatOptions: Record<string, unknown>) =>
-	x.toLocaleString(
-		chosenLocale === null ? [] : chosenLocale,
-		formatOptions
-	);
+const format = (x: Date | number, chosenLocale: string | null, formatOptions: Record<string, unknown>) => x.toLocaleString(
+	chosenLocale === null ? [] : chosenLocale,
+	formatOptions
+);
 
 const getFunction = () => ({
-	[Mode.DATE]: 'const formatDate = d => d',
-	[Mode.NUMBER]: 'const formatNumber = x => x',
+	[Mode.DATE]: "const formatDate = d => d",
+	[Mode.NUMBER]: "const formatNumber = x => x"
 })[CURRENT_MODE];
 
-const stringifyObject = (x: unknown): string =>
-	JSON.stringify(x, null, "\t")
-		.replaceAll(/(^\t+)"((?:[$_\p{ID_Start}])(?:[$_\u200C\u200D\p{ID_Continue}])*)"(?=: )/ugm, "$1$2");
+const stringifyObject = (x: unknown): string => JSON.stringify(x, null, "\t")
+	.replaceAll(/(?<whitespace>^\t+)"(?<name>(?:[$_\p{ID_Start}])(?:[$_\u200C\u200D\p{ID_Continue}])*)"(?=: )/ugm, "$1$2");
 
 export const updatePreview = (x: number | Date | string, chosenLocale: string | null, formatOptions: Record<string, unknown> | null) => {
 	const formatted = typeof x === "string" ? x : format(x, chosenLocale, formatOptions!);
@@ -45,15 +44,15 @@ export const updateCodeOutput = (chosenLocale: string | null, formatOptions: Rec
 
 export const displayErrorsInCodeOutput = (errors: string[]) => {
 	editor.setOption("mode", "ace/mode/text");
-	editor.setValue("Cannot generate code:\n" + errors.join('\n'), 1);
+	editor.setValue("Cannot generate code:\n" + errors.join("\n"), 1);
 };
 
-const scrollDown = document.getElementById("scrollDown") as HTMLButtonElement;
+const scrollDown = document.getElementById("scroll-down") as HTMLButtonElement;
 scrollDown.addEventListener("click", () => {
 	editor.renderer.getContainerElement().scrollIntoView({ behavior: "smooth" });
-});
+}, { passive: true });
 
-const copyButton = document.getElementById("copyButton") as HTMLButtonElement;
-copyButton.addEventListener("click", () => {
-	navigator.clipboard.writeText(editor.getValue());
-});
+const copy = document.getElementById("copy") as HTMLButtonElement;
+copy.addEventListener("click", async () => {
+	await navigator.clipboard.writeText(editor.getValue());
+}, { passive: true });

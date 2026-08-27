@@ -56,7 +56,7 @@ body {
 	word-break: break-all;
 }
 
-#scrollDown {
+#scroll-down {
 	width: 100%;
 	margin-top: 20px;
 	padding: 10px;
@@ -112,7 +112,7 @@ select,
 	text-decoration: line-through;
 }
 
-#copyButton {
+#copy {
 	position: absolute;
 	padding: 5px;
 	top: 0px;

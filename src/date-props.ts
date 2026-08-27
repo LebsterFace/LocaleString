@@ -23,7 +23,7 @@ const DATE_OPTIONS: Options = {
 			"Medium": "medium",
 			"Short": "short"
 		},
-		mutuallyExcludes: blockedByDT_Style,
+		"mutuallyExcludes": blockedByDT_Style,
 		"labelText": "Date style"
 	},
 	"timeStyle": {
@@ -33,7 +33,7 @@ const DATE_OPTIONS: Options = {
 			"Medium": "medium",
 			"Short": "short"
 		},
-		mutuallyExcludes: blockedByDT_Style,
+		"mutuallyExcludes": blockedByDT_Style,
 		"labelText": "Time style"
 	},
 	"hour12": {
@@ -41,7 +41,7 @@ const DATE_OPTIONS: Options = {
 			"Yes": true,
 			"No": false
 		},
-		mutuallyExcludes: [
+		"mutuallyExcludes": [
 			"hourCycle"
 		],
 		"labelText": "12 Hour cycle?"
@@ -61,7 +61,7 @@ const DATE_OPTIONS: Options = {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		mutuallyExcludes: blocksDT_Style,
+		"mutuallyExcludes": blocksDT_Style,
 		"labelText": "Era"
 	},
 	"year": {
@@ -69,7 +69,7 @@ const DATE_OPTIONS: Options = {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		mutuallyExcludes: blocksDT_Style,
+		"mutuallyExcludes": blocksDT_Style,
 		"labelText": "Year"
 	},
 	"month": {
@@ -80,7 +80,7 @@ const DATE_OPTIONS: Options = {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		mutuallyExcludes: blocksDT_Style,
+		"mutuallyExcludes": blocksDT_Style,
 		"labelText": "Month"
 	},
 	"weekday": {
@@ -89,7 +89,7 @@ const DATE_OPTIONS: Options = {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		mutuallyExcludes: blocksDT_Style,
+		"mutuallyExcludes": blocksDT_Style,
 		"labelText": "Weekday"
 	},
 	"day": {
@@ -97,7 +97,7 @@ const DATE_OPTIONS: Options = {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		mutuallyExcludes: blocksDT_Style,
+		"mutuallyExcludes": blocksDT_Style,
 		"labelText": "Day"
 	},
 	"timeZoneName": {
@@ -107,9 +107,9 @@ const DATE_OPTIONS: Options = {
 			"Short Offset": "shortOffset",
 			"Long Offset": "longOffset",
 			"Short Generic": "shortGeneric",
-			"Long Generic": "longGeneric",
+			"Long Generic": "longGeneric"
 		},
-		mutuallyExcludes: blocksDT_Style,
+		"mutuallyExcludes": blocksDT_Style,
 		"labelText": "Timezone Name"
 	},
 	"hour": {
@@ -117,7 +117,7 @@ const DATE_OPTIONS: Options = {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		mutuallyExcludes: blocksDT_Style,
+		"mutuallyExcludes": blocksDT_Style,
 		"labelText": "Hour"
 	},
 	"minute": {
@@ -125,7 +125,7 @@ const DATE_OPTIONS: Options = {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		mutuallyExcludes: blocksDT_Style,
+		"mutuallyExcludes": blocksDT_Style,
 		"labelText": "Minute"
 	},
 	"second": {
@@ -133,7 +133,7 @@ const DATE_OPTIONS: Options = {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		mutuallyExcludes: blocksDT_Style,
+		"mutuallyExcludes": blocksDT_Style,
 		"labelText": "Second"
 	},
 	"fractionalSecondDigits": {
@@ -142,7 +142,7 @@ const DATE_OPTIONS: Options = {
 			"Two": 2,
 			"Three": 3
 		},
-		mutuallyExcludes: blocksDT_Style,
+		"mutuallyExcludes": blocksDT_Style,
 		"labelText": "Fractional Second Digits"
 	},
 	"calendar": {
@@ -176,7 +176,7 @@ const DATE_OPTIONS: Options = {
 			"Basic": "basic",
 			"Best Fit": "best fit"
 		},
-		defaultValue: "best fit",
+		"defaultValue": "best fit",
 		"labelText": "Format matching algorithm"
 	},
 	"timeZone": {

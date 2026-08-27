@@ -1,11 +1,15 @@
 {
 	"compilerOptions": {
-		"target": "ES2022",
+		"target": "ES2024",
 		"module": "ESNext",
-		"outDir": "./dist",
 		"strict": true,
+		"alwaysStrict": true,
+		"moduleDetection": "force",
+		"outDir": "dist",
+		"rootDir": "src",
+		"allowSyntheticDefaultImports": true,
+		"noUnusedLocals": true,
 		"inlineSourceMap": true,
-		"lib": ["DOM", "ES2022"]
-	},
-	"include": ["src/**/*.ts"]
+		"noImplicitAny": true
+	}
 }

@@ -203,7 +203,7 @@ const NUMBER_OPTIONS: Options = {
 			"Currency symbol": "symbol",
 			"Narrow format symbol": "narrowSymbol",
 			"ISO currency code": "code",
-			"Currency name": "name",
+			"Currency name": "name"
 		},
 		defaultValue: "symbol",
 		labelText: "Currency Display",
@@ -266,7 +266,7 @@ const NUMBER_OPTIONS: Options = {
 		usageCondition: {
 			prerequisite: { name: "style", value: "unit" },
 			message: "Must be specified if and only if 'Formatting Style' is 'Unit'"
-		},
+		}
 	},
 	unitPer: {
 		labelText: "Unit Per",
@@ -275,7 +275,7 @@ const NUMBER_OPTIONS: Options = {
 			prerequisite: { name: "style", value: "unit" },
 			message: "Has no effect unless 'Formatting Style' is 'Unit'",
 			optional: true
-		},
+		}
 	},
 	unitDisplay: {
 		labelText: "Unit Display",
@@ -312,7 +312,7 @@ const NUMBER_OPTIONS: Options = {
 			"Half-Floor (ties toward -∞)": "halfFloor",
 			"Half-Expand (ties away from 0)": "halfExpand",
 			"Half-Trunc (ties toward 0)": "halfTrunc",
-			"Half-Even (ties towards the nearest even integer)": "halfEven",
+			"Half-Even (ties towards the nearest even integer)": "halfEven"
 		},
 		defaultValue: "halfExpand"
 	},
@@ -335,10 +335,10 @@ const NUMBER_OPTIONS: Options = {
 		labelText: "Trailing Zero Display",
 		values: {
 			"Automatic": "auto",
-			"Strip if integer": "stripIfInteger",
+			"Strip if integer": "stripIfInteger"
 		},
 		defaultValue: "auto"
-	},
+	}
 	// FIXME: [minimumIntegerDigits, minimumFractionDigits, maximumFractionDigits, minimumSignificantDigits, maximumSignificantDigits]
 };
 
