@@ -47,7 +47,7 @@ const setTooltip = ({ container }: OptionWrapper, message: string | null) => {
 		container.dataset.flow = "";
 	} else {
 		container.dataset.tooltip = message;
-		container.dataset.flow = "left";
+		container.dataset.flow = "right";
 	}
 };
 

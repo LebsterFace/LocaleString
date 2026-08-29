@@ -18,6 +18,14 @@ editor.setOptions({
 
 editor.renderer.setScrollMargin(5, 0, 0, 0);
 
+const darkMode = window.matchMedia("(prefers-color-scheme: dark)");
+const updateTheme = () => {
+	editor.setTheme(darkMode.matches ? "ace/theme/dracula" : "ace/theme/chrome");
+};
+
+darkMode.addEventListener("change", updateTheme, { passive: true });
+updateTheme();
+
 const format = (x: Date | number, chosenLocale: string | null, formatOptions: Record<string, unknown>) => x.toLocaleString(
 	chosenLocale === null ? [] : chosenLocale,
 	formatOptions
