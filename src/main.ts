@@ -51,12 +51,12 @@ const setTooltip = ({ container }: OptionWrapper, message: string | null) => {
 	}
 };
 
-let chosenLocale: string | null = null;
+let chosenLocale = "runtime-default";
 let unitPer: string | null = null;
 const SPECIAL_HANDLERS: Record<string, (value: string | null) => void> = {
 	// First parameter of toLocaleString
 	locale: (value) => {
-		chosenLocale = value;
+		chosenLocale = value ?? "runtime-default";
 	},
 
 	// '-per-{unit}' suffix for the 'unit' option
@@ -136,7 +136,7 @@ const update = () => {
 		updateCodeOutput(chosenLocale, opts);
 	} else {
 		displayErrorsInCodeOutput(errorMessages);
-		updatePreview("-", null, null);
+		updatePreview("-", "runtime-default", null);
 	}
 };
 
@@ -169,7 +169,8 @@ const createOption = (name: string, option: Option): OptionWrapper => {
 		select.append(create("option"));
 	}
 
-	select.append(...Object.entries(option.values).map(([key, value]) => create("option", { // Each possible value for this property gets an <option> element
+	select.append(...Object.entries(option.values).map(([key, value]) => create("option", {
+		// Each possible value for this property gets an <option> element
 		value: option.defaultValue === value ? "" : JSON.stringify(value),
 		textContent: option.defaultValue === value ? `${key} (Default)` : key,
 		selected: option.defaultValue === value
@@ -187,7 +188,12 @@ const createOption = (name: string, option: Option): OptionWrapper => {
 	return { select, label, container, name };
 };
 
-createOption("locale", { labelText: "Locale", values: locales });
+createOption("locale", {
+	labelText: "Locale",
+	values: locales,
+	defaultValue: "runtime-default"
+});
+
 for (const [name, option] of Object.entries(OPTIONS)) {
 	optionElements.set(name, createOption(name, option));
 }

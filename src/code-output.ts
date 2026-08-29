@@ -26,8 +26,20 @@ const updateTheme = () => {
 darkMode.addEventListener("change", updateTheme, { passive: true });
 updateTheme();
 
-const format = (x: Date | number, chosenLocale: string | null, formatOptions: Record<string, unknown>) => x.toLocaleString(
-	chosenLocale === null ? [] : chosenLocale,
+const chosenLocaleCode = (chosenLocale: string) => {
+	if (chosenLocale === "runtime-default") return "[]";
+	if (chosenLocale === "user-preference") return "navigator.languages";
+	return JSON.stringify(chosenLocale);
+};
+
+const chosenLocaleValue = (chosenLocale: string) => {
+	if (chosenLocale === "runtime-default") return [];
+	if (chosenLocale === "user-preference") return navigator.languages;
+	return chosenLocale;
+};
+
+const format = (x: Date | number, chosenLocale: string, formatOptions: Record<string, unknown>) => x.toLocaleString(
+	chosenLocaleValue(chosenLocale),
 	formatOptions
 );
 
@@ -39,14 +51,14 @@ const getFunction = () => ({
 const stringifyObject = (x: unknown): string => JSON.stringify(x, null, "\t")
 	.replaceAll(/(?<whitespace>^\t+)"(?<name>(?:[$_\p{ID_Start}])(?:[$_\u200C\u200D\p{ID_Continue}])*)"(?=: )/ugm, "$1$2");
 
-export const updatePreview = (x: number | Date | string, chosenLocale: string | null, formatOptions: Record<string, unknown> | null) => {
+export const updatePreview = (x: number | Date | string, chosenLocale: string, formatOptions: Record<string, unknown> | null) => {
 	const formatted = typeof x === "string" ? x : format(x, chosenLocale, formatOptions!);
 	previewElement.textContent = formatted;
 };
 
-export const updateCodeOutput = (chosenLocale: string | null, formatOptions: Record<string, unknown>) => {
+export const updateCodeOutput = (chosenLocale: string, formatOptions: Record<string, unknown>) => {
 	editor.setOption("mode", "ace/mode/javascript");
-	const locale = chosenLocale === null ? "[]" : `"${chosenLocale}"`;
+	const locale = chosenLocaleCode(chosenLocale);
 	editor.setValue(`${getFunction()}.toLocaleString(${locale}, ${stringifyObject(formatOptions)});`, 1);
 };
 
