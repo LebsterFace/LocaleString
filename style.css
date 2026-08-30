@@ -42,13 +42,43 @@
 
 body {
 	background-color: var(--main-background);
+	background-image:
+		radial-gradient(circle at 20% 15%, color-mix(in srgb, var(--accent-color) 22%, transparent), transparent 40%),
+		radial-gradient(circle at 88% 82%, color-mix(in srgb, var(--tooltip-color) 18%, transparent), transparent 45%);
+	background-attachment: fixed;
 	font-family: Roboto, sans-serif;
 	color: var(--text-color);
 	display: flex;
-	height: 100vh;
+	flex-wrap: wrap;
+	min-height: 100vh;
 	padding: 1em;
 	align-items: center;
 	justify-content: center;
+	position: relative;
+}
+
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: -1;
+	background-repeat: no-repeat;
+	background-position: 90% 50%;
+	background-size: min(65vw, 640px);
+	opacity: 0.5;
+	mix-blend-mode: overlay;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='92' fill='none' stroke='white' stroke-width='1.5'/%3E%3Cellipse cx='100' cy='100' rx='30' ry='92' fill='none' stroke='white' stroke-width='1'/%3E%3Cellipse cx='100' cy='100' rx='60' ry='92' fill='none' stroke='white' stroke-width='1'/%3E%3Cellipse cx='100' cy='100' rx='92' ry='30' fill='none' stroke='white' stroke-width='1'/%3E%3Cellipse cx='100' cy='100' rx='92' ry='60' fill='none' stroke='white' stroke-width='1'/%3E%3Cline x1='8' y1='100' x2='192' y2='100' stroke='white' stroke-width='1'/%3E%3Cline x1='100' y1='8' x2='100' y2='192' stroke='white' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+#mode, #code {
+	position: relative;
+	z-index: 1;
+}
+
+#main {
+	position: relative;
+	z-index: 2;
 }
 
 #mode {
@@ -149,14 +179,15 @@ select:focus, .option input:focus {
 
 #copy {
 	position: absolute;
-	padding: 5px;
-	top: 0;
-	right: 0;
+	padding: 0.5em 0;
+	bottom: -3em;
+	left: 0;
+	width: 100%;
 	border: none;
 	outline: none;
 	color: #fff;
 	background: var(--accent-color);
-	border-radius: 0 0 0 5px;
+	border-radius: 5px;
 	font-weight: bold;
 	cursor: pointer;
 }
@@ -167,10 +198,14 @@ select:focus, .option input:focus {
 
 .panel {
 	width: 900px;
+	max-width: 100%;
 	padding: 10px;
-	box-shadow: var(--shadow-color) 15px 15px 30px 0;
+	box-shadow: var(--shadow-color) 15px 15px 30px 0, inset 0 1px 0 color-mix(in srgb, white 25%, transparent);
 	border-radius: 10px;
-	background-color: var(--panel-color);
+	border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
+	background-color: color-mix(in srgb, var(--panel-color) 55%, transparent);
+	backdrop-filter: blur(16px) saturate(150%);
+	-webkit-backdrop-filter: blur(16px) saturate(150%);
 	margin: 0 5%;
 }
 
@@ -182,8 +217,8 @@ select:focus, .option input:focus {
 }
 
 #main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	flex: 1;
 }

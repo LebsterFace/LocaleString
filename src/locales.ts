@@ -1,4 +1,6 @@
 export const locales = {
+	"Runtime": "runtime-default",
+	"User Preference": "user-preference",
 	"🇳🇦 Afrikaans (Namibia)": "af-NA",
 	"🇿🇦 Afrikaans (South Africa)": "af-ZA",
 	"🇬🇭 Akan (Ghana)": "ak-GH",
