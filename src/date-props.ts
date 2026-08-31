@@ -11,7 +11,8 @@ const blockedByDT_Style = [
 	"second",
 	"fractionalSecondDigits",
 	"timeZoneName",
-	"era"
+	"era",
+	"dayPeriod"
 ];
 
 const blocksDT_Style = ["dateStyle", "timeStyle"];
@@ -526,6 +527,7 @@ const DATE_OPTIONS: Options = {
 			"Short": "short",
 			"Long": "long"
 		},
+		"rules": excludesSoft(blocksDT_Style, "Day Period"),
 		"labelText": "Day Period"
 	},
 	"formatMatcher": {
