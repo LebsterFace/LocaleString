@@ -1,10 +1,6 @@
 # `toLocaleString` Generator
-Automatically generate code to format JavaScript `Date` objects or `number` values.
+Automatically generate JavaScript code to format `Date` and `number` values using the `Intl` APIs. Allows selecting locale and formatting options using dropdowns, validates that the combination is valid, and shows a preview of the result.
 
 ## **[Try it online!](https://lebster.xyz/projects/localestring)**
 
----
-
-![Date Formatting Inputs](screenshots/inputs-date.png)
-![Number Formatting Inputs](screenshots/inputs-number.png)
-![Generated Number Formatting Code](screenshots/generated-number.png)
+![User interface preview](preview.webp)

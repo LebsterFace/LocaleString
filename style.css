@@ -14,7 +14,6 @@
 	--main-background: light-dark(#F5F3FB, #1A1826);
 	--panel-color: light-dark(#FFFFFF, #262538);
 	--dropdown-color: light-dark(#ECE8F7, #34314A);
-	--border-color: light-dark(#DCD3F0, #3A3552);
 	--dropdown-hover-color: light-dark(#E1D8F5, #423C5E);
 	--accent-color: light-dark(#7C3AED, #8B5CF6);
 	--accent-hover-color: light-dark(#6D28D9, #7C3AED);
@@ -85,7 +84,6 @@ body::before {
 	position: fixed;
 	top: 10px;
 	right: 10px;
-	border: 1px solid var(--border-color);
 	padding: 0 5px;
 	color: var(--text-color);
 	background: var(--panel-color);
@@ -112,9 +110,8 @@ body::before {
 	padding: 10px;
 	font-size: 1.25rem;
 	color: #fff;
-	border: none;
 	outline: none;
-	border-radius: 5px;
+	border-radius: 3px;
 	background-color: var(--accent-color);
 	box-shadow: var(--shadow-color) 0 0 10px 0;
 	cursor: pointer;
@@ -132,10 +129,8 @@ body::before {
 
 .option {
 	display: flex;
-	padding: 3px 0;
-	padding-left: 10px;
 	transition: box-shadow 200ms ease;
-	border-bottom: 1px solid var(--border-color);
+	padding: 3px 0 3px 5px;
 }
 
 select, .option input {
@@ -145,14 +140,18 @@ select, .option input {
 	color: var(--text-color);
 	padding: 5px;
 	flex: 1;
-	border-radius: 2px;
+	border-radius: 3px;
 }
 
-select:hover, .option input:hover {
+select:not(:disabled):hover, .option input:not(:disabled):hover {
 	background-color: var(--dropdown-hover-color);
 }
 
-select:focus, .option input:focus {
+.option:has( :is(select, input):not(:disabled):hover) {
+	background-color: color-mix(in srgb, var(--dropdown-hover-color) 25%, transparent);
+}
+
+select:not(:disabled):focus, .option input:not(:disabled):focus {
 	box-shadow: 0 0 0 2px var(--focus-color);
 }
 
@@ -187,7 +186,7 @@ select:focus, .option input:focus {
 	outline: none;
 	color: #fff;
 	background: var(--accent-color);
-	border-radius: 5px;
+	border-radius: 3px;
 	font-weight: bold;
 	cursor: pointer;
 }
@@ -200,10 +199,9 @@ select:focus, .option input:focus {
 	width: 900px;
 	max-width: 100%;
 	padding: 10px;
-	box-shadow: var(--shadow-color) 15px 15px 30px 0, inset 0 1px 0 color-mix(in srgb, white 25%, transparent);
-	border-radius: 10px;
-	border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
-	background-color: color-mix(in srgb, var(--panel-color) 55%, transparent);
+	box-shadow: var(--shadow-color) 15px 15px 30px 0;
+	border-radius: 3px;
+	background-color: color-mix(in srgb, var(--panel-color) 85%, transparent);
 	backdrop-filter: blur(16px) saturate(150%);
 	-webkit-backdrop-filter: blur(16px) saturate(150%);
 	margin: 0 5%;
@@ -221,4 +219,5 @@ select:focus, .option input:focus {
 	justify-content: center;
 	align-items: center;
 	flex: 1;
+	font-size: small;
 }
