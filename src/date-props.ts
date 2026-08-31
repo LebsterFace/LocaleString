@@ -1,4 +1,5 @@
-import type { Options } from "./props.js";
+import type { Options, Rule } from "./props.js";
+import { assertRulesReferenceKnownOptions } from "./validation.js";
 
 const blockedByDT_Style = [
 	"weekday",
@@ -15,6 +16,14 @@ const blockedByDT_Style = [
 
 const blocksDT_Style = ["dateStyle", "timeStyle"];
 
+/** A soft (disable-only, never a validation error) mutual-exclusion rule per target. */
+const excludesSoft = (targets: readonly string[], ownLabel: string): Rule[] => targets.map(option => ({
+	type: "excludes",
+	soft: true,
+	option,
+	message: `Cannot be used with '${ownLabel}'.`
+}));
+
 const DATE_OPTIONS: Options = {
 	"dateStyle": {
 		"values": {
@@ -23,7 +32,7 @@ const DATE_OPTIONS: Options = {
 			"Medium": "medium",
 			"Short": "short"
 		},
-		"mutuallyExcludes": blockedByDT_Style,
+		"rules": excludesSoft(blockedByDT_Style, "Date style"),
 		"labelText": "Date style"
 	},
 	"timeStyle": {
@@ -33,10 +42,9 @@ const DATE_OPTIONS: Options = {
 			"Medium": "medium",
 			"Short": "short"
 		},
-		"mutuallyExcludes": blockedByDT_Style,
+		"rules": excludesSoft(blockedByDT_Style, "Time style"),
 		"labelText": "Time style"
 	},
-
 	"timeZone": {
 		"values": {
 			"UTC": "UTC",
@@ -393,7 +401,7 @@ const DATE_OPTIONS: Options = {
 			"Short Generic": "shortGeneric",
 			"Long Generic": "longGeneric"
 		},
-		"mutuallyExcludes": blocksDT_Style,
+		"rules": excludesSoft(blocksDT_Style, "Timezone Name"),
 		"labelText": "Timezone Name"
 	},
 	"hour12": {
@@ -401,9 +409,7 @@ const DATE_OPTIONS: Options = {
 			"Yes": true,
 			"No": false
 		},
-		"mutuallyExcludes": [
-			"hourCycle"
-		],
+		"rules": excludesSoft(["hourCycle"], "12 Hour cycle?"),
 		"labelText": "12 Hour cycle?"
 	},
 	"hourCycle": {
@@ -421,7 +427,7 @@ const DATE_OPTIONS: Options = {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		"mutuallyExcludes": blocksDT_Style,
+		"rules": excludesSoft(blocksDT_Style, "Era"),
 		"labelText": "Era"
 	},
 	"year": {
@@ -429,7 +435,7 @@ const DATE_OPTIONS: Options = {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"mutuallyExcludes": blocksDT_Style,
+		"rules": excludesSoft(blocksDT_Style, "Year"),
 		"labelText": "Year"
 	},
 	"month": {
@@ -440,7 +446,7 @@ const DATE_OPTIONS: Options = {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		"mutuallyExcludes": blocksDT_Style,
+		"rules": excludesSoft(blocksDT_Style, "Month"),
 		"labelText": "Month"
 	},
 	"weekday": {
@@ -449,7 +455,7 @@ const DATE_OPTIONS: Options = {
 			"Short": "short",
 			"Narrow": "narrow"
 		},
-		"mutuallyExcludes": blocksDT_Style,
+		"rules": excludesSoft(blocksDT_Style, "Weekday"),
 		"labelText": "Weekday"
 	},
 	"day": {
@@ -457,7 +463,7 @@ const DATE_OPTIONS: Options = {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"mutuallyExcludes": blocksDT_Style,
+		"rules": excludesSoft(blocksDT_Style, "Day"),
 		"labelText": "Day"
 	},
 	"hour": {
@@ -465,7 +471,7 @@ const DATE_OPTIONS: Options = {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"mutuallyExcludes": blocksDT_Style,
+		"rules": excludesSoft(blocksDT_Style, "Hour"),
 		"labelText": "Hour"
 	},
 	"minute": {
@@ -473,7 +479,7 @@ const DATE_OPTIONS: Options = {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"mutuallyExcludes": blocksDT_Style,
+		"rules": excludesSoft(blocksDT_Style, "Minute"),
 		"labelText": "Minute"
 	},
 	"second": {
@@ -481,7 +487,7 @@ const DATE_OPTIONS: Options = {
 			"Numeric": "numeric",
 			"2 Digit": "2-digit"
 		},
-		"mutuallyExcludes": blocksDT_Style,
+		"rules": excludesSoft(blocksDT_Style, "Second"),
 		"labelText": "Second"
 	},
 	"fractionalSecondDigits": {
@@ -490,7 +496,7 @@ const DATE_OPTIONS: Options = {
 			"Two": 2,
 			"Three": 3
 		},
-		"mutuallyExcludes": blocksDT_Style,
+		"rules": excludesSoft(blocksDT_Style, "Fractional Second Digits"),
 		"labelText": "Fractional Second Digits"
 	},
 	"calendar": {
@@ -531,5 +537,7 @@ const DATE_OPTIONS: Options = {
 		"labelText": "Format matching algorithm"
 	}
 };
+
+assertRulesReferenceKnownOptions(DATE_OPTIONS);
 
 export default DATE_OPTIONS;

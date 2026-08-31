@@ -18,5 +18,5 @@ document.documentElement.dataset.mode = CURRENT_MODE;
 modeDropdown.addEventListener("input", () => {
 	const u = new URL(location.href);
 	u.searchParams.set("mode", modeDropdown.value);
-	location.href = u.toString(); // FIXME: Avoid reload
+	location.href = u.toString();
 });
