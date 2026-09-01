@@ -67,11 +67,6 @@ export const displayErrorsInCodeOutput = (errors: string[]) => {
 	editor.setValue("Cannot generate code:\n" + errors.join("\n"), 1);
 };
 
-const scrollDown = document.getElementById("scroll-down") as HTMLButtonElement;
-scrollDown.addEventListener("click", () => {
-	editor.renderer.getContainerElement().scrollIntoView({ behavior: "smooth" });
-}, { passive: true });
-
 const copy = document.getElementById("copy") as HTMLButtonElement;
 copy.addEventListener("click", async () => {
 	await navigator.clipboard.writeText(editor.getValue());

@@ -20,7 +20,7 @@
 	&:after {
 		content: attr(data-tooltip);
 		text-align: center;
-		width: 40ch;
+		width: min(40ch, calc(100vw - 2em));
 		padding: 6px 8px;
 		border-radius: 3px;
 		background: var(--tooltip-color);
